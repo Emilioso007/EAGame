@@ -58,8 +58,9 @@ public class Game extends Screen {
         p.fill(255);
 
         p.ellipseMode(PApplet.RADIUS);
-        p.ellipse(gameManager.getBall().getX(), gameManager.getBall().getY(), gameManager.getBall().getRadius(),
-                gameManager.getBall().getRadius());
+        p.ellipse(gameManager.getBall().getX() * 40, gameManager.getBall().getY() * 40,
+                gameManager.getBall().getRadius() * 40,
+                gameManager.getBall().getRadius() * 40);
 
     }
 

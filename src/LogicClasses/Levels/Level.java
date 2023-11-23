@@ -3,7 +3,7 @@ package LogicClasses.Levels;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Level{
+public class Level {
 
     PApplet p;
 
@@ -25,10 +25,7 @@ public class Level{
 
     public int getGridState(float x, float y) {
 
-        int tempx = (int)PApplet.map(x, 0, p.width, 0, image.width);
-        int tempy = (int)PApplet.map(y, 0, p.height, 0, image.height);
-
-        return grid[tempx][tempy];
+        return grid[(int) x][(int) y];
 
     }
 
@@ -43,11 +40,11 @@ public class Level{
                 int g = (pixel >> 8) & 0xFF;
                 int b = pixel & 0xFF;
 
-                if (r == 0 && g == 0 && b == 255) { //blue
+                if (r == 0 && g == 0 && b == 255) { // blue
                     grid[i][j] = 0;
-                } else if (r == 0 && g == 255 && b == 0) { //green
+                } else if (r == 0 && g == 255 && b == 0) { // green
                     grid[i][j] = 1;
-                } else if (r == 255 && g == 0 && b == 0) { //red
+                } else if (r == 255 && g == 0 && b == 0) { // red
                     grid[i][j] = 2;
                 }
 
@@ -65,4 +62,3 @@ public class Level{
     }
 
 }
-

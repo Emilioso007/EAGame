@@ -18,7 +18,7 @@ public class GameManager {
 
         levelManager = new LevelManager(this.screenManager.getP());
 
-        ball = new Ball(100, screenManager.getP().height / 2, 16);
+        ball = new Ball(2.0f, 2.0f, 0.5f);
 
         golfClub = new GolfClub(ball);
 
@@ -28,11 +28,15 @@ public class GameManager {
 
         if (screenManager.getP().mousePressed) {
 
-            float angle = (float) Math.atan2(screenManager.getP().mouseY - ball.getY(),
-                    screenManager.getP().mouseX - ball.getX());
+            float mouseX = screenManager.getP().mouseX/40.0f;
 
-            float power = (float) Math.sqrt(Math.pow(screenManager.getP().mouseX - ball.getX(), 2)
-                    + Math.pow(screenManager.getP().mouseY - ball.getY(), 2)) * 0.1f;
+            float mouseY = screenManager.getP().mouseY/40.0f;
+
+            float angle = (float) Math.atan2(mouseY - ball.getY(),
+                    mouseX - ball.getX());
+
+            float power = (float) Math.sqrt(Math.pow(mouseX - ball.getX(), 2)
+                    + Math.pow(mouseY - ball.getY(), 2)) * 0.1f;
 
             golfClub.swing(angle, power);
 
