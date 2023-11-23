@@ -1,14 +1,19 @@
 package LogicClasses;
 
 import LogicClasses.Levels.*;
+import processing.core.PApplet;
 
 public class LevelManager {
+
+    PApplet p;
     
     Level currentLevel;
 
-    public LevelManager() {
+    public LevelManager(PApplet p) {
 
-        currentLevel = new Level_1();
+        this.p = p;
+
+        currentLevel = new Level_1(this.p);
 
     }
 

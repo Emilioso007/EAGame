@@ -14,7 +14,12 @@ public class Ball extends Circle{
     }
 
     public boolean hitGround(Level currentLevel){
-        return getY() + getRadius() >= currentLevel.getGroundLevel();
+        return currentLevel.getGridState(this.getX(), getY() + getRadius()) == 1;
+    }
+
+    public void fall(){
+        velocity.y += 0.1;
+        this.position.add(velocity);
     }
 
 }

@@ -4,7 +4,7 @@ package LogicClasses.Utilities;
 import processing.core.PVector;
 
 public class Circle {
-    private PVector position;
+    public PVector position;
     
     private float radius;
 

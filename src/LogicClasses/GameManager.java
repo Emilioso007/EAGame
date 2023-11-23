@@ -13,6 +13,9 @@ public class GameManager {
 
     public GameManager(ScreenManager screenManager) {
         this.screenManager = screenManager;
+
+        levelManager = new LevelManager(this.screenManager.getP());
+
         ball = new Ball(100, screenManager.getP().height / 2, 16);
     }
 
