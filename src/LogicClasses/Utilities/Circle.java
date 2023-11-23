@@ -1,45 +1,49 @@
+
 package LogicClasses.Utilities;
 
+import processing.core.PVector;
+
 public class Circle {
+    private PVector position;
     
-    private float x, y, radius;
+    private float radius;
 
     public Circle(float x, float y, float radius) {
-        this.x = x;
-        this.y = y;
+        this.position = new PVector(x, y);
         this.radius = radius;
     }
 
     public boolean contains(float x, float y) {
-        return Math.sqrt(Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2)) <= radius;
+        float distance = PVector.dist(position, new PVector(x, y));
+        return distance <= radius;
     }
 
     public boolean intersects(Circle circle) {
-        return Math.sqrt(Math.pow(circle.x - this.x, 2) + Math.pow(circle.y - this.y, 2)) <= circle.radius + this.radius;
+        float distance = PVector.dist(position, circle.position);
+        return distance <= radius + circle.radius;
     }
 
-    public void setX(float x) {
-        this.x = x;
+    public void setPosition(float x, float y) {
+        position.set(x, y);
     }
 
-    public void setY(float y) {
-        this.y = y; 
+    public PVector getPosition() {
+        return position;
     }
 
     public float getX() {
-        return x;
+        return position.x;
     }
 
     public float getY() {
-        return y;
+        return position.y;
     }
 
     public void setRadius(float radius) {
-        this.radius = radius; 
+        this.radius = radius;
     }
-    
+
     public float getRadius() {
         return radius;
     }
-
 }
