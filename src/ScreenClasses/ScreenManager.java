@@ -11,7 +11,7 @@ public class ScreenManager {
     public ScreenManager(PApplet p) {
         this.p = p;
 
-        this.currentScreen = new StartMenu();
+        this.currentScreen = new StartMenu(this);
     }
 
     public void run() {
