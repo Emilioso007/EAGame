@@ -56,5 +56,13 @@ public class Level{
 
     }
 
+    public PImage getImage() {
+        return image.copy();
+    }
+
+    public int[][] getGrid() {
+        return grid;
+    }
+
 }
 

@@ -1,7 +1,7 @@
 package LogicClasses;
 
-import LogicClasses.Levels.Level;
 import ScreenClasses.ScreenManager;
+import processing.core.PImage;
 
 public class GameManager {
     
@@ -16,7 +16,7 @@ public class GameManager {
 
         levelManager = new LevelManager(this.screenManager.getP());
 
-        ball = new Ball(100, screenManager.getP().height / 2, 16);
+        ball = new Ball(800, screenManager.getP().height / 2, 16);
     }
 
     public void update() {
@@ -27,6 +27,14 @@ public class GameManager {
 
     public Ball getBall() {
         return ball;
+    }
+
+    public PImage getCurrentLevelImage() {
+        return levelManager.getCurrentLevel().getImage();
+    }
+
+    public int[][] getCurrentLevelGrid() {
+        return levelManager.getCurrentLevel().getGrid();
     }
 
 }

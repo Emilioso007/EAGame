@@ -7,7 +7,7 @@ public class Level_1 extends Level {
 
     public Level_1(PApplet p) {
 
-        super(p, p.loadImage("\\LevelImages\\level_1.png"));
+        super(p, p.loadImage("\\Images\\Levels\\level_1.png"));
 
     }
 
