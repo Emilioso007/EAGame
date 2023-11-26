@@ -35,7 +35,7 @@ public class Game extends Screen {
 
     public void render() {
 
-        int[][] grid = gameManager.getCurrentLevelGrid();
+        int[][] grid = gameManager.getCurrentLevelGridState();
 
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[0].length; y++) {
@@ -61,6 +61,12 @@ public class Game extends Screen {
         p.ellipse(gameManager.getBall().getX() * 40, gameManager.getBall().getY() * 40,
                 gameManager.getBall().getRadius() * 40,
                 gameManager.getBall().getRadius() * 40);
+
+        p.fill(0);
+        p.textSize(20);
+        p.textAlign(PApplet.CENTER, PApplet.CENTER);
+        p.text("x: " + gameManager.getBall().getX() + " y: " + gameManager.getBall().getY() + "\nxSpeed: "
+                + gameManager.getBall().getXSpeed() + " ySpeed: " + gameManager.getBall().getYSpeed() + "\nSwings: " + gameManager.getGolfClub().getSwings(), 16 * 40, 9 * 40);
 
     }
 

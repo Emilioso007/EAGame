@@ -7,43 +7,70 @@ import processing.core.PVector;
 
 public class Ball extends Circle {
 
-    PVector velocity = new PVector(0, 0);
+    public PVector velocity = new PVector(0, 0);
 
-    boolean onGround = false;
+    boolean inAir = false;
 
     Ball(float x, float y, float radius) {
         super(x, y, radius);
     }
 
     public void update(Level currentLevel) {
+        
+        inAir = false;
 
-        if (hitGround(currentLevel) && velocity.y > 0 ) {
-            onGround = true;
-        } else {
-            onGround = false;
+        if (PApplet.abs(velocity.y) > 0.1) {
+            inAir = true;
         }
 
-        if (onGround) {
-            velocity.y = 0;
-        } else {
-            fall();
+        for(int i = 0; i < currentLevel.getGrid().length; i++) {
+            for(int j = 0; j < currentLevel.getGrid()[0].length; j++) {
+                if(this.intersects(currentLevel.getGrid()[i][j])) {
+                    if(currentLevel.getGridState(i, j) == 1) {
+                        velocity.x = 0;
+                        velocity.y = 0;
+                        position.x = i;
+                        position.y = j;
+                    }
+                }
+            }
         }
 
-        velocity.x *= 0.9;
+        if (inAir) {
+            velocity.y += 0.001;
+        }
 
-        position.add(velocity);    
-    
-        position.x = PApplet.constrain(position.x, 0+getRadius(), 32-getRadius());
-        position.y = PApplet.constrain(position.y, 0+getRadius(), 18-getRadius());
+        position.add(velocity);
+
+        checkGoal(currentLevel);
 
     }
 
-    public boolean hitGround(Level currentLevel) {
-        return currentLevel.getGridState(this.getX(), getY() + getRadius()) == 1;
+    public boolean checkGoal(Level currentLevel) {
+
+        if (currentLevel.getGridState(this.getX(), this.getY()) == 2) {
+            return true;
+        }
+
+        return false;
+
     }
 
-    public void fall() {
-        velocity.y += 0.1;
+
+    public boolean isInAir() {
+        return inAir;
+    }
+
+    public float getXSpeed() {
+        return velocity.x;
+    }
+
+    public float getYSpeed() {
+        return velocity.y;
+    }
+
+    public boolean hitGoal(Level currentLevel) {
+        return currentLevel.getGridState(this.getX(), this.getY()) == 2;
     }
 
 }

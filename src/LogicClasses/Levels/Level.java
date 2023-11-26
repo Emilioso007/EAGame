@@ -1,5 +1,6 @@
 package LogicClasses.Levels;
 
+import LogicClasses.Utilities.AABB;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -9,7 +10,9 @@ public class Level {
 
     PImage image;
 
-    int[][] grid;
+    AABB[][] grid;
+
+    int[][] gridState;
 
     public Level(PApplet p, PImage image) {
 
@@ -17,7 +20,8 @@ public class Level {
 
         this.image = image;
 
-        grid = new int[image.width][image.height];
+        grid = new AABB[image.width][image.height];
+        gridState = new int[image.width][image.height];
 
         calculateGrid();
 
@@ -25,7 +29,10 @@ public class Level {
 
     public int getGridState(float x, float y) {
 
-        return grid[(int) x][(int) y];
+        int tempx = (int)PApplet.constrain(x, 0, image.width - 1);
+        int tempy = (int)PApplet.constrain(y, 0, image.height - 1);
+
+        return gridState[tempx][tempy];
 
     }
 
@@ -41,12 +48,14 @@ public class Level {
                 int b = pixel & 0xFF;
 
                 if (r == 0 && g == 0 && b == 255) { // blue
-                    grid[i][j] = 0;
+                    gridState[i][j] = 0;
                 } else if (r == 0 && g == 255 && b == 0) { // green
-                    grid[i][j] = 1;
+                    gridState[i][j] = 1;
                 } else if (r == 255 && g == 0 && b == 0) { // red
-                    grid[i][j] = 2;
+                    gridState[i][j] = 2;
                 }
+
+                grid[i][j] = new AABB(i, j, 1, 1);
 
             }
         }
@@ -57,7 +66,11 @@ public class Level {
         return image.copy();
     }
 
-    public int[][] getGrid() {
+    public int[][] getGridState() {
+        return gridState;
+    }
+
+    public AABB[][] getGrid() {
         return grid;
     }
 
