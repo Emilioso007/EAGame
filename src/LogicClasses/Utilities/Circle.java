@@ -35,8 +35,16 @@ public class Circle {
         return position.x;
     }
 
+    public void setX(float x) {
+        position.x = x;
+    }
+
     public float getY() {
         return position.y;
+    }
+
+    public void setY(float y) {
+        position.y = y;
     }
 
     public void setRadius(float radius) {

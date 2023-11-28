@@ -74,4 +74,12 @@ public class Level {
         return grid;
     }
 
+    public int getWidth() {
+        return image.width;
+    }
+
+    public int getHeight() {
+        return image.height;
+    }
+
 }

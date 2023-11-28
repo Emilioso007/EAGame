@@ -1,5 +1,6 @@
 package ScreenClasses;
 
+import ScreenClasses.Screens.Game;
 import ScreenClasses.Screens.StartMenu;
 import processing.core.PApplet;
 
@@ -11,7 +12,7 @@ public class ScreenManager {
     public ScreenManager(PApplet p) {
         this.p = p;
 
-        this.currentScreen = new StartMenu(this);
+        this.currentScreen = new Game(this);
     }
 
     public void run() {

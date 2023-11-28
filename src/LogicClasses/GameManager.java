@@ -19,7 +19,7 @@ public class GameManager {
 
         levelManager = new LevelManager(this.screenManager.getP());
 
-        ball = new Ball(2.0f, 2.0f, 0.5f);
+        ball = new Ball(2.0f, 2.0f, 0.25f);
 
         golfClub = new GolfClub(ball);
 
@@ -37,7 +37,7 @@ public class GameManager {
                     mouseX - ball.getX());
 
             float power = PApplet.constrain((float) Math.sqrt(Math.pow(mouseX - ball.getX(), 2)
-                    + Math.pow(mouseY - ball.getY(), 2)) * 0.1f, 0, 1);
+                    + Math.pow(mouseY - ball.getY(), 2)) * 0.25f, 0, 1);
 
             golfClub.swing(angle, power);
 
@@ -45,9 +45,9 @@ public class GameManager {
 
         ball.update(levelManager.getCurrentLevel());
 
-        if(ball.hitGoal(levelManager.getCurrentLevel())) {
+        if (ball.hitGoal(levelManager.getCurrentLevel())) {
             levelManager.nextLevel();
-            ball = new Ball(2.0f, 2.0f, 0.5f);
+            ball = new Ball(2.0f, 2.0f, 0.25f);
             golfClub.setBall(ball);
         }
 
@@ -69,8 +69,8 @@ public class GameManager {
         return levelManager.getCurrentLevel().getGridState();
     }
 
-    public Object getClub() {
-        return null;
+    public int getCurrentLevelIndex() {
+        return levelManager.getCurrentLevelIndex();
     }
 
 }

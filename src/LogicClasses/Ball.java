@@ -7,55 +7,58 @@ import processing.core.PVector;
 
 public class Ball extends Circle {
 
-    public PVector velocity = new PVector(0, 0);
+    public PVector velocity = new PVector(0, 0.01f);
 
-    boolean inAir = false;
+    boolean inAir = true;
 
     Ball(float x, float y, float radius) {
         super(x, y, radius);
     }
 
     public void update(Level currentLevel) {
-        
-        inAir = false;
 
-        if (PApplet.abs(velocity.y) > 0.1) {
+        if (currentLevel.getGridState(this.getX(), this.getY() + getRadius()) == 0) {
             inAir = true;
+        } else {
+            inAir = false;
         }
 
-        for(int i = 0; i < currentLevel.getGrid().length; i++) {
-            for(int j = 0; j < currentLevel.getGrid()[0].length; j++) {
-                if(this.intersects(currentLevel.getGrid()[i][j])) {
-                    if(currentLevel.getGridState(i, j) == 1) {
-                        velocity.x = 0;
-                        velocity.y = 0;
-                        position.x = i;
-                        position.y = j;
-                    }
-                }
-            }
+        velocity.y += inAir ? 0.05f : 0;
+
+        velocity.x *= 0.95f;
+
+        if (currentLevel.getGridState(this.getX() + this.getRadius(), this.getY()) == 1 && velocity.x > 0 ||
+                currentLevel.getGridState(this.getX() - this.getRadius(), this.getY()) == 1 && velocity.x < 0) {
+            velocity.x *= -0.75f;
         }
 
-        if (inAir) {
-            velocity.y += 0.001;
+        if (currentLevel.getGridState(this.getX(), this.getY() - this.getRadius()) == 1 && velocity.y < 0) {
+            velocity.y *= -0.75f;
         }
 
         position.add(velocity);
 
-        checkGoal(currentLevel);
+        if (currentLevel.getGridState(this.getX(), this.getY() + this.getRadius()) == 1
+                && PApplet.abs(velocity.y) > 0) {
 
-    }
+            velocity.y = 0;
 
-    public boolean checkGoal(Level currentLevel) {
+            this.setY(this.getY() - (this.getY() + this.getRadius()) % 1.0f);
 
-        if (currentLevel.getGridState(this.getX(), this.getY()) == 2) {
-            return true;
         }
 
-        return false;
+        if(this.getX() - this.getRadius() < 0) {
+            this.setX(0 + this.getRadius());
+            this.velocity.x *= -0.75f;
+        }
+
+        if(this.getX() + this.getRadius() > currentLevel.getWidth()) {
+            this.setX(currentLevel.getWidth() - this.getRadius());
+            this.velocity.x *= -0.75f;
+        }
+
 
     }
-
 
     public boolean isInAir() {
         return inAir;
@@ -70,7 +73,7 @@ public class Ball extends Circle {
     }
 
     public boolean hitGoal(Level currentLevel) {
-        return currentLevel.getGridState(this.getX(), this.getY()) == 2;
+        return currentLevel.getGridState(this.getX(), this.getY() + getRadius() + 0.5f) == 2;
     }
 
 }

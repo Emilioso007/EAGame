@@ -14,6 +14,8 @@ public class Game extends Screen {
 
     PImage[] textures;
 
+    String worldType;
+
     public Game(ScreenManager screenManager) {
 
         gameManager = new GameManager(screenManager);
@@ -22,10 +24,12 @@ public class Game extends Screen {
 
         textures = new PImage[4];
 
-        textures[0] = p.loadImage("\\Images\\Textures\\sky.png");
-        textures[1] = p.loadImage("\\Images\\Textures\\grass.png");
-        textures[2] = p.loadImage("\\Images\\Textures\\hole.png");
-        textures[3] = p.loadImage("\\Images\\Textures\\dirt.png");
+        worldType = "earth";
+
+        textures[0] = p.loadImage("\\Images\\Textures\\" + worldType + "\\sky.png");
+        textures[1] = p.loadImage("\\Images\\Textures\\" + worldType + "\\grass.png");
+        textures[2] = p.loadImage("\\Images\\Textures\\" + worldType + "\\hole.png");
+        textures[3] = p.loadImage("\\Images\\Textures\\" + worldType + "\\dirt.png");
 
     }
 
@@ -66,7 +70,8 @@ public class Game extends Screen {
         p.textSize(20);
         p.textAlign(PApplet.CENTER, PApplet.CENTER);
         p.text("x: " + gameManager.getBall().getX() + " y: " + gameManager.getBall().getY() + "\nxSpeed: "
-                + gameManager.getBall().getXSpeed() + " ySpeed: " + gameManager.getBall().getYSpeed() + "\nSwings: " + gameManager.getGolfClub().getSwings(), 16 * 40, 9 * 40);
+                + gameManager.getBall().getXSpeed() + " ySpeed: " + gameManager.getBall().getYSpeed() + "\nSwings: "
+                + gameManager.getGolfClub().getSwings(), 16 * 40, 9 * 40);
 
     }
 
