@@ -14,22 +14,44 @@ public class Game extends Screen {
 
     PImage[] textures;
 
-    String worldType;
-
     public Game(ScreenManager screenManager) {
 
         gameManager = new GameManager(screenManager);
 
         this.p = screenManager.getP();
 
-        textures = new PImage[4];
+        int amountOfWorlds = 4;
 
-        worldType = "earth";
+        textures = new PImage[4 * amountOfWorlds];
 
-        textures[0] = p.loadImage("\\Images\\Textures\\" + worldType + "\\sky.png");
-        textures[1] = p.loadImage("\\Images\\Textures\\" + worldType + "\\grass.png");
-        textures[2] = p.loadImage("\\Images\\Textures\\" + worldType + "\\hole.png");
-        textures[3] = p.loadImage("\\Images\\Textures\\" + worldType + "\\dirt.png");
+        String worldType;
+
+        for (int i = 0; i < amountOfWorlds; i++) {
+
+            switch (i) {
+                case 0:
+                    worldType = "Earth";
+                    break;
+                case 1:
+                    worldType = "Moon";
+                    break;
+                case 2:
+                    worldType = "Mars";
+                    break;
+                case 3:
+                    worldType = "Mercury";
+                    break;
+                default:
+                    worldType = "Earth";
+                    break;
+            }
+
+            textures[0 + i * 4] = p.loadImage("\\Images\\Textures\\" + worldType + "\\sky.png");
+            textures[1 + i * 4] = p.loadImage("\\Images\\Textures\\" + worldType + "\\grass.png");
+            textures[2 + i * 4] = p.loadImage("\\Images\\Textures\\" + worldType + "\\hole.png");
+            textures[3 + i * 4] = p.loadImage("\\Images\\Textures\\" + worldType + "\\dirt.png");
+
+        }
 
     }
 
@@ -38,6 +60,28 @@ public class Game extends Screen {
     }
 
     public void render() {
+
+        String worldType = gameManager.getLevelManager().getCurrentLevel().getWorldType();
+
+        int worldIndex = 0;
+
+        switch (worldType) {
+            case "Earth":
+                worldIndex = 0;
+                break;
+            case "Moon":
+                worldIndex = 1;
+                break;
+            case "Mars":
+                worldIndex = 2;
+                break;
+            case "Mercury":
+                worldIndex = 3;
+                break;
+            default:
+                worldIndex = 0;
+                break;
+        }
 
         int[][] grid = gameManager.getCurrentLevelGridState();
 
@@ -54,7 +98,7 @@ public class Game extends Screen {
                     value = 3;
                 }
 
-                p.image(textures[value], x * 40, y * 40);
+                p.image(textures[value + worldIndex*4], x * 40, y * 40);
 
             }
         }

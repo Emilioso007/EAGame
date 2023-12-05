@@ -14,6 +14,8 @@ public class Level {
 
     int[][] gridState;
 
+    String worldType;
+
     public Level(PApplet p, PImage image) {
 
         this.p = p;
@@ -29,14 +31,37 @@ public class Level {
 
     public int getGridState(float x, float y) {
 
-        int tempx = (int)PApplet.constrain(x, 0, image.width - 1);
-        int tempy = (int)PApplet.constrain(y, 0, image.height - 1);
+        int tempx = (int) PApplet.constrain(x, 0, image.width - 1);
+        int tempy = (int) PApplet.constrain(y, 0, image.height - 1);
 
         return gridState[tempx][tempy];
 
     }
 
     private void calculateGrid() {
+
+        int pixelZero = image.get(0, 0) >> 16 & 0xFF;
+
+        switch (pixelZero) {
+            case 1:
+                worldType = "Earth";
+                break;
+
+            case 2:
+                worldType = "Moon";
+                break;
+
+            case 3:
+                worldType = "Mars";
+                break;
+
+            case 4:
+                worldType = "Mercury";
+                break;
+            default:
+                worldType = "Earth";
+                break;
+        }
 
         for (int i = 0; i < image.width; i++) {
             for (int j = 0; j < image.height; j++) {
@@ -47,11 +72,11 @@ public class Level {
                 int g = (pixel >> 8) & 0xFF;
                 int b = pixel & 0xFF;
 
-                if (r == 0 && g == 0 && b == 255) { // blue
+                if (r != 255 && g != 255 && b == 255) { // blue
                     gridState[i][j] = 0;
-                } else if (r == 0 && g == 255 && b == 0) { // green
+                } else if (r != 255 && g == 255 && b != 255) { // green
                     gridState[i][j] = 1;
-                } else if (r == 255 && g == 0 && b == 0) { // red
+                } else if (r == 255 && g != 255 && b != 255) { // red
                     gridState[i][j] = 2;
                 }
 
@@ -80,6 +105,10 @@ public class Level {
 
     public int getHeight() {
         return image.height;
+    }
+
+    public String getWorldType() {
+        return worldType;
     }
 
 }

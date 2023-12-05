@@ -3,6 +3,7 @@ package LogicClasses;
 import ScreenClasses.ScreenManager;
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.core.PVector;
 
 public class GameManager {
 
@@ -27,6 +28,32 @@ public class GameManager {
 
     public void update() {
 
+        float levelGravity = 0.0f;
+
+        switch (levelManager.getCurrentLevel().getWorldType()) {
+            case "Earth":
+                levelGravity = 9.82f;
+                break;
+            case "Moon":
+                levelGravity = 1.62f;
+                break;
+            case "Mars":
+                levelGravity = 3.711f;
+                break;
+            case "Mercury":
+                levelGravity = 3.7f;
+                break;
+            default:
+                levelGravity = 9.82f;
+                break;
+        }
+
+        float gravity = levelGravity * 0.01f;
+
+        PVector gravityVector = new PVector(0, gravity).mult(ball.getMass());
+
+        ball.addAcceleration(gravityVector);
+
         if (screenManager.getP().mousePressed && !ball.isInAir()) {
 
             float mouseX = screenManager.getP().mouseX / 40.0f;
@@ -37,7 +64,7 @@ public class GameManager {
                     mouseX - ball.getX());
 
             float power = PApplet.constrain((float) Math.sqrt(Math.pow(mouseX - ball.getX(), 2)
-                    + Math.pow(mouseY - ball.getY(), 2)) * 0.25f, 0, 1);
+                    + Math.pow(mouseY - ball.getY(), 2)) * 0.010f, 0, 1);
 
             golfClub.swing(angle, power);
 
@@ -71,6 +98,10 @@ public class GameManager {
 
     public int getCurrentLevelIndex() {
         return levelManager.getCurrentLevelIndex();
+    }
+
+    public LevelManager getLevelManager() {
+        return levelManager;
     }
 
 }
