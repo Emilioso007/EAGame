@@ -1,6 +1,6 @@
 package ScreenClasses;
 
-import ScreenClasses.Screens.Game;
+import LogicClasses.Utilities.MouseHandler;
 import ScreenClasses.Screens.StartMenu;
 import processing.core.PApplet;
 
@@ -12,7 +12,7 @@ public class ScreenManager {
     public ScreenManager(PApplet p) {
         this.p = p;
 
-        this.currentScreen = new Game(this);
+        this.currentScreen = new StartMenu(this);
     }
 
     public void run() {
@@ -22,6 +22,7 @@ public class ScreenManager {
 
     public void update() {
         currentScreen.update();
+        MouseHandler.update();
     }
 
     public void render() {

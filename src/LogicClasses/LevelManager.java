@@ -12,7 +12,7 @@ public class LevelManager {
 
     int currentLevelIndex = 0;
 
-    PImage[] levelImages = new PImage[8];
+    PImage[] levelImages = new PImage[9];
 
     public LevelManager(PApplet p) {
 
@@ -23,7 +23,7 @@ public class LevelManager {
         }
 
         currentLevel = new Level(p, levelImages[currentLevelIndex]);
-
+        
     }
 
     public Level getCurrentLevel() {

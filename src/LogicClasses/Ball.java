@@ -23,46 +23,46 @@ public class Ball extends Circle {
         acceleration.mult(0.1f);
 
         velocity.add(acceleration);
-        
 
         for (int i = 0; i < 10; i++) {
 
             position.add(velocity);
 
-            //check if in air
+            // check if in air
             if (currentLevel.getGridState(this.getX(), this.getY() + getRadius()) == 0) {
                 inAir = true;
+
             } else {
                 inAir = false;
+                
+                velocity.x *= 0.99f;
             }
 
-            // velocity.x *= 0.95f;
-
-            //check for collision with block walls
+            // check for collision with block walls
             if (currentLevel.getGridState(this.getX() + this.getRadius(), this.getY()) == 1 && velocity.x > 0 ||
                     currentLevel.getGridState(this.getX() - this.getRadius(), this.getY()) == 1 && velocity.x < 0) {
                 velocity.x *= -0.75f;
             }
 
-            //check for collision with block ceiling
+            // check for collision with block ceiling
             if (currentLevel.getGridState(this.getX(), this.getY() - this.getRadius()) == 1 && velocity.y < 0) {
                 velocity.y *= -0.75f;
             }
 
-            //check for collision with ground
+            // check for collision with ground
             if (currentLevel.getGridState(this.getX(), this.getY() + this.getRadius()) == 1
                     && PApplet.abs(velocity.y) > 0) {
                 velocity.y = 0;
                 this.setY(this.getY() - (this.getY() + this.getRadius()) % 1.0f);
             }
 
-            //bounce left wall
+            // bounce left wall
             if (this.getX() - this.getRadius() < 0) {
                 this.setX(0 + this.getRadius());
                 this.velocity.x *= -0.75f;
             }
 
-            //bounce right wall
+            // bounce right wall
             if (this.getX() + this.getRadius() > currentLevel.getWidth()) {
                 this.setX(currentLevel.getWidth() - this.getRadius());
                 this.velocity.x *= -0.75f;

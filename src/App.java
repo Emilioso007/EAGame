@@ -1,3 +1,4 @@
+import LogicClasses.Utilities.MouseHandler;
 import ScreenClasses.ScreenManager;
 import processing.core.*;
 
@@ -13,6 +14,10 @@ public class App extends PApplet {
         size(1280,720, P2D);
 
         screenManager = new ScreenManager(this);
+    }
+
+    public void setup() {
+        MouseHandler.init(this);
     }
 
     public void draw() {

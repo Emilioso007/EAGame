@@ -1,8 +1,15 @@
 package ScreenClasses;
 
+import processing.core.PApplet;
+
 public class Screen {
     
-    public Screen() {
+    protected ScreenManager screenManager;
+    protected PApplet p;
+
+    public Screen(ScreenManager screenManager) {
+        this.screenManager = screenManager; 
+        this.p = screenManager.getP();
 
     }
 

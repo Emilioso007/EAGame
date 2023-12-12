@@ -10,15 +10,13 @@ public class Game extends Screen {
 
     GameManager gameManager;
 
-    PApplet p;
-
     PImage[] textures;
 
     public Game(ScreenManager screenManager) {
 
-        gameManager = new GameManager(screenManager);
+        super(screenManager);
 
-        this.p = screenManager.getP();
+        gameManager = new GameManager(screenManager);
 
         int amountOfWorlds = 4;
 

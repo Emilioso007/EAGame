@@ -15,7 +15,10 @@ public class AABB {
     }
 
     public boolean contains(float x, float y) {
-        return (Math.abs(x - this.x) < width && Math.abs(y - this.y) < height);
+        
+        return (x > this.x - width && x < this.x + width &&
+                y > this.y - height && y < this.y + height);
+
     }
     
     public boolean intersects(AABB other) {
