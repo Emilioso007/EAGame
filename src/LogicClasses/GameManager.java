@@ -70,12 +70,16 @@ public class GameManager {
 
         }
 
-        ball.update(levelManager.getCurrentLevel());
+        for (int i = 0; i < 10; i++) {
 
-        if (ball.hitGoal(levelManager.getCurrentLevel())) {
-            levelManager.nextLevel();
-            ball = new Ball(2.0f, 2.0f, 0.25f);
-            golfClub.setBall(ball);
+            ball.update(levelManager.getCurrentLevel());
+
+            if (ball.hitGoal(levelManager.getCurrentLevel())) {
+                levelManager.nextLevel();
+                ball = new Ball(2.0f, 2.0f, 0.25f);
+                golfClub.setBall(ball);
+            }
+
         }
 
     }

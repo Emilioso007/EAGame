@@ -26,7 +26,7 @@ public class Ball extends Circle {
 
         for (int i = 0; i < 10; i++) {
 
-            position.add(velocity);
+            position.add(velocity.copy().mult(0.1f));
 
             // check if in air
             if (currentLevel.getGridState(this.getX(), this.getY() + getRadius()) == 0) {
@@ -35,7 +35,7 @@ public class Ball extends Circle {
             } else {
                 inAir = false;
                 
-                velocity.x *= 0.99f;
+                velocity.x *= 0.995f;
             }
 
             // check for collision with block walls

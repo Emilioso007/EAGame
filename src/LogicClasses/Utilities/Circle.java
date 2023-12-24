@@ -78,6 +78,46 @@ public class Circle {
 
     }
 
+public int intersectsV2(AABB other) {
+    float closestX = position.x;
+    float closestY = position.y;
+
+    if (position.x < other.getX()) {
+        closestX = other.getX();
+    } else if (position.x > other.getX() + other.getWidth()) {
+        closestX = other.getX() + other.getWidth();
+    }
+
+    if (position.y < other.getY()) {
+        closestY = other.getY();
+    } else if (position.y > other.getY() + other.getHeight()) {
+        closestY = other.getY() + other.getHeight();
+    }
+
+    float distance = PVector.dist(position, new PVector(closestX, closestY));
+
+    if (distance <= radius) {
+        float dx = position.x - closestX;
+        float dy = position.y - closestY;
+
+        if (Math.abs(dx) > Math.abs(dy)) {
+            if (dx > 0) {
+                return 1; // Hit the left side
+            } else {
+                return 2; // Hit the right side
+            }
+        } else {
+            if (dy > 0) {
+                return 3; // Hit the top side
+            } else {
+                return 4; // Hit the bottom side
+            }
+        }
+    }
+
+    return 0; // No intersection
+}
+
     public int intersectsAdvanced(AABB other) {
 
         int hitWall = 0;
