@@ -34,8 +34,12 @@ public class Ball extends Circle {
 
             } else {
                 inAir = false;
-                
-                velocity.x *= 0.995f;
+
+                velocity.x *= 0.9995f;
+
+                if (PApplet.abs(velocity.x) < 0.001f) {
+                    velocity.x = 0;
+                }
             }
 
             // check for collision with block walls
