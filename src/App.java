@@ -1,4 +1,3 @@
-//test
 
 import LogicClasses.Utilities.MouseHandler;
 import ScreenClasses.ScreenManager;

@@ -1,5 +1,6 @@
 package LogicClasses;
 
+import LogicClasses.Utilities.MouseHandler;
 import ScreenClasses.ScreenManager;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -54,32 +55,28 @@ public class GameManager {
 
         ball.addAcceleration(gravityVector);
 
-        if (screenManager.getP().mousePressed && !ball.isInAir()) {
+        if (MouseHandler.leftPressed &&  ball.velocity.mag() < 0.01f) {
 
             float mouseX = screenManager.getP().mouseX / 40.0f;
 
             float mouseY = screenManager.getP().mouseY / 40.0f;
 
-            float angle = (float) Math.atan2(mouseY - ball.getY(),
-                    mouseX - ball.getX());
+            float angle = (float) Math.atan2(mouseY - ball.position.y,
+                    mouseX - ball.position.x);
 
-            float power = PApplet.constrain((float) Math.sqrt(Math.pow(mouseX - ball.getX(), 2)
-                    + Math.pow(mouseY - ball.getY(), 2)) * 0.010f, 0, 1);
+            float power = PApplet.constrain((float) Math.sqrt(Math.pow(mouseX - ball.position.x, 2)
+                    + Math.pow(mouseY - ball.position.y, 2)) * 0.10f, 0, 1);
 
             golfClub.swing(angle, power);
 
         }
 
-        for (int i = 0; i < 10; i++) {
+        ball.update(levelManager.getCurrentLevel());
 
-            ball.update(levelManager.getCurrentLevel());
-
-            if (ball.hitGoal(levelManager.getCurrentLevel())) {
-                levelManager.nextLevel();
-                ball = new Ball(2.0f, 2.0f, 0.25f);
-                golfClub.setBall(ball);
-            }
-
+        if (ball.hitGoal(levelManager.getCurrentLevel())) {
+            levelManager.nextLevel();
+            ball = new Ball(2.0f, 2.0f, 0.25f);
+            golfClub.setBall(ball);
         }
 
     }
@@ -96,8 +93,8 @@ public class GameManager {
         return levelManager.getCurrentLevel().getImage();
     }
 
-    public int[][] getCurrentLevelGridState() {
-        return levelManager.getCurrentLevel().getGridState();
+    public Cell[][] getCurrentLevelGridState() {
+        return levelManager.getCurrentLevel().getCells();
     }
 
     public int getCurrentLevelIndex() {

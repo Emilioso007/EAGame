@@ -1,6 +1,5 @@
 package LogicClasses;
 
-import LogicClasses.Levels.*;
 import processing.core.PApplet;
 import processing.core.PImage;
 

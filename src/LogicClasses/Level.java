@@ -1,4 +1,4 @@
-package LogicClasses.Levels;
+package LogicClasses;
 
 import LogicClasses.Utilities.AABB;
 import processing.core.PApplet;
@@ -10,9 +10,7 @@ public class Level {
 
     PImage image;
 
-    AABB[][] grid;
-
-    int[][] gridState;
+    Cell[][] cells;
 
     String worldType;
 
@@ -22,8 +20,7 @@ public class Level {
 
         this.image = image;
 
-        grid = new AABB[image.width][image.height];
-        gridState = new int[image.width][image.height];
+        cells = new Cell[image.width][image.height];
 
         calculateGrid();
 
@@ -34,7 +31,7 @@ public class Level {
         int tempx = (int) PApplet.constrain(x, 0, image.width - 1);
         int tempy = (int) PApplet.constrain(y, 0, image.height - 1);
 
-        return gridState[tempx][tempy];
+        return cells[tempx][tempy].state;
 
     }
 
@@ -72,15 +69,17 @@ public class Level {
                 int g = (pixel >> 8) & 0xFF;
                 int b = pixel & 0xFF;
 
+                int state = 0;
+
                 if (r != 255 && g != 255 && b == 255) { // blue
-                    gridState[i][j] = 0;
+                    state = 0;
                 } else if (r != 255 && g == 255 && b != 255) { // green
-                    gridState[i][j] = 1;
+                    state = 1;
                 } else if (r == 255 && g != 255 && b != 255) { // red
-                    gridState[i][j] = 2;
+                    state = 2;
                 }
 
-                grid[i][j] = new AABB(i, j, 1, 1);
+                cells[i][j] = new Cell(i, j, 1, 1, state);
 
             }
         }
@@ -91,12 +90,24 @@ public class Level {
         return image.copy();
     }
 
-    public int[][] getGridState() {
-        return gridState;
+    public Cell[][] getCells() {
+        return cells;
     }
 
-    public AABB[][] getGrid() {
-        return grid;
+    public Cell[] getGrid1D(){
+
+        Cell[] grid1D = new Cell[image.width * image.height];
+
+        for(int i = 0; i < image.width; i++){
+            for(int j = 0; j < image.height; j++){
+
+                grid1D[i + (j * image.width)] = cells[i][j];
+
+            }
+        }
+
+        return grid1D;
+
     }
 
     public int getWidth() {

@@ -42,12 +42,12 @@ public class Button extends AABB {
         } else {
             p.fill(0, 147, 81);
         }
-        p.rect(getX(), getY(), getWidth(), getHeight());
+        p.rect(x, y, width, height);
 
         p.fill(255);
         p.textSize(24);
         p.textAlign(PConstants.CENTER, PConstants.CENTER);
-        p.text(text, getX() + getWidth() / 2, getY() + getHeight() / 2);
+        p.text(text, x + width / 2, y + height / 2);
 
     }
 
