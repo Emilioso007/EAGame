@@ -1,3 +1,5 @@
+//test1
+
 import LogicClasses.Utilities.MouseHandler;
 import ScreenClasses.ScreenManager;
 import processing.core.*;
@@ -11,7 +13,7 @@ public class App extends PApplet {
     }
 
     public void settings() {
-        size(1280,720, P2D);
+        size(1280, 720, P2D);
 
         screenManager = new ScreenManager(this);
     }
