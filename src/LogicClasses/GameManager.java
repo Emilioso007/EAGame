@@ -10,11 +10,11 @@ public class GameManager {
 
     private PApplet p;
 
-    LevelManager levelManager;
+    public LevelManager levelManager;
 
-    Ball ball;
+    public Ball ball;
 
-    GolfClub golfClub;
+    public GolfClub golfClub;
 
     public GameManager() {
         this.p = ScreenManager.p;
@@ -31,7 +31,7 @@ public class GameManager {
 
         float levelGravity = 0.0f;
 
-        switch (levelManager.getCurrentLevel().getWorldType()) {
+        switch (levelManager.currentLevel.worldType) {
             case "Earth":
                 levelGravity = 9.82f;
                 break;
@@ -73,9 +73,9 @@ public class GameManager {
 
         for (int i = 0; i < 10; i++) {
 
-            ball.update(levelManager.getCurrentLevel());
+            ball.update(levelManager.currentLevel);
 
-            if (ball.hitGoal(levelManager.getCurrentLevel())) {
+            if (ball.hitGoal(levelManager.currentLevel)) {
                 levelManager.nextLevel();
                 ball = new Ball(2.0f, 2.0f, 0.25f);
                 golfClub.setBall(ball);
@@ -94,11 +94,11 @@ public class GameManager {
     }
 
     public PImage getCurrentLevelImage() {
-        return levelManager.getCurrentLevel().getImage();
+        return levelManager.currentLevel.getImage();
     }
 
     public int[][] getCurrentLevelGridState() {
-        return levelManager.getCurrentLevel().getGridState();
+        return levelManager.currentLevel.getGridState();
     }
 
     public int getCurrentLevelIndex() {

@@ -10,8 +10,8 @@ public class Game extends Screen {
 
     private PApplet p;
 
-    GameManager gameManager;
-    PImage[] textures;
+    private GameManager gameManager;
+    private PImage[] textures;
 
     public Game() {
         super();
@@ -60,7 +60,7 @@ public class Game extends Screen {
 
     public void render() {
 
-        String worldType = gameManager.getLevelManager().getCurrentLevel().getWorldType();
+        String worldType = gameManager.getLevelManager().currentLevel.getWorldType();
 
         int worldIndex = 0;
 

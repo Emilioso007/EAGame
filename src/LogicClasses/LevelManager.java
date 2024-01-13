@@ -10,7 +10,7 @@ public class LevelManager {
 
     private PApplet p;
 
-    Level currentLevel;
+    public Level currentLevel;
 
     int currentLevelIndex = 0;
 
@@ -24,12 +24,8 @@ public class LevelManager {
             levelImages[i] = p.loadImage("\\Images\\Levels\\level_" + (i) + ".png");
         }
 
-        currentLevel = new Level(p, levelImages[currentLevelIndex]);
+        currentLevel = new Level(levelImages[currentLevelIndex]);
 
-    }
-
-    public Level getCurrentLevel() {
-        return currentLevel;
     }
 
     public int getCurrentLevelIndex() {
@@ -39,7 +35,7 @@ public class LevelManager {
     public void nextLevel() {
         currentLevelIndex++;
         try{
-        currentLevel = new Level(p, levelImages[currentLevelIndex]);
+        currentLevel = new Level(levelImages[currentLevelIndex]);
         } catch(Exception e){
             ScreenManager.changeScreen(new EndScreen());
         }

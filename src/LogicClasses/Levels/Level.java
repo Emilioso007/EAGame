@@ -1,24 +1,24 @@
 package LogicClasses.Levels;
 
 import LogicClasses.Utilities.AABB;
+import ScreenClasses.ScreenManager;
 import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Level {
 
-    PApplet p;
+    private PApplet p;
 
-    PImage image;
+    public PImage image;
 
-    AABB[][] grid;
+    public AABB[][] grid;
 
-    int[][] gridState;
+    public int[][] gridState;
 
-    String worldType;
+    public String worldType;
 
-    public Level(PApplet p, PImage image) {
-
-        this.p = p;
+    public Level(PImage image) {
+        this.p = ScreenManager.p;
 
         this.image = image;
 

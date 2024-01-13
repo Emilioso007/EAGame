@@ -3,7 +3,6 @@ package ScreenClasses.Screens;
 import ScreenClasses.Screen;
 import ScreenClasses.ScreenManager;
 import processing.core.PApplet;
-import processing.core.PConstants;
 import processing.core.PImage;
 
 public class EndScreen extends Screen{
