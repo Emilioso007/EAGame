@@ -8,13 +8,15 @@ package ScreenClasses.ScreenObjects;
 import processing.core.*;
 
 import LogicClasses.Utilities.AABB;
-import LogicClasses.Utilities.MouseHandler;
+import LogicClasses.Utilities.MH;
 
 public class Button extends AABB {
 
-    private String text, key;
+    private String text;
 
-    private boolean pressed = false;
+    public String key;
+
+    public boolean pressed = false;
     private boolean pressedA = false, pressedB = true;
 
     public Button(int x, int y, int w, int h, String text, String key) {
@@ -26,11 +28,7 @@ public class Button extends AABB {
     public void update() {
         
         pressedB = !pressedA;
-        if (this.contains(MouseHandler.mouseX, MouseHandler.mouseY) && MouseHandler.leftPressed) {
-            pressedA = true;
-        } else {
-            pressedA = false;
-        }
+        pressedA = (this.contains(MH.mouseX, MH.mouseY) && MH.leftPressed);
 
         pressed = (pressedA && pressedB);
 

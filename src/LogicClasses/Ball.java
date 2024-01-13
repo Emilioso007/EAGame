@@ -102,4 +102,8 @@ public class Ball extends Circle {
         return mass;
     }
 
+    public boolean isMoving() {
+        return velocity.mag() > 0.001f;
+    }
+
 }

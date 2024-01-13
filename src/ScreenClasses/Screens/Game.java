@@ -8,15 +8,16 @@ import processing.core.PImage;
 
 public class Game extends Screen {
 
-    GameManager gameManager;
+    private PApplet p;
 
+    GameManager gameManager;
     PImage[] textures;
 
-    public Game(ScreenManager screenManager) {
+    public Game() {
+        super();
+        p = ScreenManager.p;
 
-        super(screenManager);
-
-        gameManager = new GameManager(screenManager);
+        gameManager = new GameManager();
 
         int amountOfWorlds = 4;
 

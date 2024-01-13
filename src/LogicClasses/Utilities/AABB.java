@@ -10,14 +10,14 @@ public class AABB {
     public AABB(float x, float y, float width, float height) {
         this.x = x;
         this.y = y;
-        this.width = width / 2;
-        this.height = height / 2;
+        this.width = width;
+        this.height = height;
     }
 
     public boolean contains(float x, float y) {
         
-        return (x > this.x - width && x < this.x + width &&
-                y > this.y - height && y < this.y + height);
+        return (x > this.x && x < this.x + width &&
+                y > this.y && y < this.y + height);
 
     }
     

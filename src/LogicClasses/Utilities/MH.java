@@ -6,18 +6,18 @@ package LogicClasses.Utilities;
 
 import processing.core.PApplet;
 
-public class MouseHandler {
+public class MH {
 
     private static PApplet p;
 
     public static boolean leftPressed, rightPressed;
     public static int mouseX, mouseY;
 
-    private MouseHandler() {
+    private MH() {
     }
 
-    public static void init(PApplet p) {
-        MouseHandler.p = p;
+    public static void initialize(PApplet p) {
+        MH.p = p;
     }
 
     public static void update() {

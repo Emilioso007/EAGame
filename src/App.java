@@ -1,7 +1,8 @@
 //test1
 
-import LogicClasses.Utilities.MouseHandler;
+import LogicClasses.Utilities.MH;
 import ScreenClasses.ScreenManager;
+import ScreenClasses.Screens.StartMenu;
 import processing.core.*;
 
 public class App extends PApplet {
@@ -14,19 +15,28 @@ public class App extends PApplet {
 
     public void settings() {
         size(1280, 720, P2D);
-
-        screenManager = new ScreenManager(this);
+        smooth(8);
     }
 
     public void setup() {
-        MouseHandler.init(this);
+        MH.initialize(this);
+        ScreenManager.initialize(this);
+        ScreenManager.changeScreen(new StartMenu());
     }
 
     public void draw() {
+        MH.update();
 
-        background(42);
+        ScreenManager.run();
 
-        screenManager.run();
+        showFPS();
+    }
+
+    private void showFPS() {
+        fill(255);
+        textSize(16);
+        textAlign(RIGHT, TOP);
+        text("FPS: " + (int) frameRate, width, 0);
     }
 
 }

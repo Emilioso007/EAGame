@@ -1,45 +1,26 @@
 package ScreenClasses;
 
-import LogicClasses.Utilities.MouseHandler;
-import ScreenClasses.Screens.StartMenu;
-import processing.core.PApplet;
+import processing.core.*;
 
 public class ScreenManager {
 
-    private PApplet p;
-    private Screen currentScreen;
+  public static PApplet p;
+  public static Screen currentScreen;
 
-    public ScreenManager(PApplet p) {
-        this.p = p;
+  private ScreenManager(PApplet p) {
+  }
 
-        this.currentScreen = new StartMenu(this);
-    }
+  public static void initialize(PApplet p) {
+    ScreenManager.p = p;
+  }
 
-    public void run() {
-        update();
-        render();
-    }
+  public static void run() {
+    p.background(0);
+    ScreenManager.currentScreen.update();
+    ScreenManager.currentScreen.render();
+  }
 
-    public void update() {
-        currentScreen.update();
-        MouseHandler.update();
-    }
-
-    public void render() {
-        currentScreen.render();
-
-        p.fill(255);
-        p.textSize(16);
-        p.textAlign(PApplet.RIGHT, PApplet.TOP);
-        p.text("FPS: " + (int) p.frameRate, p.width, 0);
-    }
-
-    public PApplet getP() {
-        return p;
-    }
-
-    public void changeScreen(Screen screen) {
-        currentScreen = screen;
-    }
-
+  public static void changeScreen(Screen screen) {
+    currentScreen = screen;
+  }
 }

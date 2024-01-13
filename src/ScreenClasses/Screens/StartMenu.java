@@ -1,8 +1,6 @@
 package ScreenClasses.Screens;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
 import ScreenClasses.Screen;
 import ScreenClasses.ScreenManager;
 import ScreenClasses.ScreenObjects.Button;
@@ -10,12 +8,14 @@ import processing.core.PApplet;
 
 public class StartMenu extends Screen{
 
+    private PApplet p;
     private ArrayList<Button> buttons;
 
-    public StartMenu(ScreenManager screenManager) {
-        super(screenManager);
-        buttons = new ArrayList<Button>();
+    public StartMenu() {
+        super();
+        p = ScreenManager.p;
 
+        buttons = new ArrayList<Button>();
         buttons.add(new Button(p.width / 2 - 100, p.height / 2 - 50, 200, 100, "Start", "startButton"));
         buttons.add(new Button(p.width / 2 - 100, p.height / 2 + 100, 200, 100, "Exit", "exitButton"));
     }
@@ -27,10 +27,10 @@ public class StartMenu extends Screen{
         }
 
         for(int i = 0; i < buttons.size(); i++){
-            if(buttons.get(i).isPressed()){
-                switch(buttons.get(i).getKey()){
+            if(buttons.get(i).pressed){
+                switch(buttons.get(i).key){
                     case "startButton":
-                        screenManager.changeScreen(new Game(screenManager));
+                        ScreenManager.changeScreen(new Game());
                         break;
                     case "exitButton":
                         p.exit();

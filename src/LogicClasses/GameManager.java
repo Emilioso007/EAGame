@@ -1,5 +1,6 @@
 package LogicClasses;
 
+import LogicClasses.Utilities.MH;
 import ScreenClasses.ScreenManager;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -7,7 +8,7 @@ import processing.core.PVector;
 
 public class GameManager {
 
-    ScreenManager screenManager;
+    private PApplet p;
 
     LevelManager levelManager;
 
@@ -15,10 +16,10 @@ public class GameManager {
 
     GolfClub golfClub;
 
-    public GameManager(ScreenManager screenManager) {
-        this.screenManager = screenManager;
+    public GameManager() {
+        this.p = ScreenManager.p;
 
-        levelManager = new LevelManager(this.screenManager.getP());
+        levelManager = new LevelManager();
 
         ball = new Ball(2.0f, 2.0f, 0.25f);
 
@@ -54,11 +55,11 @@ public class GameManager {
 
         ball.addAcceleration(gravityVector);
 
-        if (screenManager.getP().mousePressed && !ball.isInAir()) {
+        if (MH.leftPressed && !ball.isMoving()) {
 
-            float mouseX = screenManager.getP().mouseX / 40.0f;
+            float mouseX = MH.mouseX / 40.0f;
 
-            float mouseY = screenManager.getP().mouseY / 40.0f;
+            float mouseY = MH.mouseY / 40.0f;
 
             float angle = (float) Math.atan2(mouseY - ball.getY(),
                     mouseX - ball.getX());
