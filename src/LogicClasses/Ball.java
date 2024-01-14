@@ -7,7 +7,7 @@ import processing.core.PVector;
 
 public class Ball extends Circle {
 
-    public PVector velocity = new PVector(0, 0);
+    public PVector velocity = new PVector(0, 0.01f);
     public PVector acceleration = new PVector(0, 0);
 
     float mass = 0.5f;
@@ -103,7 +103,7 @@ public class Ball extends Circle {
     }
 
     public boolean isMoving() {
-        return velocity.mag() > 0.001f;
+        return velocity.mag() > 0.00001f;
     }
 
 }

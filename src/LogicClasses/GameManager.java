@@ -21,7 +21,7 @@ public class GameManager {
 
         levelManager = new LevelManager();
 
-        ball = new Ball(2.0f, 2.0f, 0.25f);
+        ball = new Ball(1.5f, 2.0f, 0.25f);
 
         golfClub = new GolfClub(ball);
 
@@ -77,7 +77,7 @@ public class GameManager {
 
             if (ball.hitGoal(levelManager.currentLevel)) {
                 levelManager.nextLevel();
-                ball = new Ball(2.0f, 2.0f, 0.25f);
+                ball = new Ball(1.5f, 2.0f, 0.25f);
                 golfClub.setBall(ball);
             }
 

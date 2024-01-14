@@ -42,6 +42,7 @@ public class StartMenu extends Screen{
     }
 
     public void render() {
+        p.background(0);
 
         for(Button button : buttons){
             button.render(p);

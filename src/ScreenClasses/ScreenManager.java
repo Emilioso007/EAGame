@@ -15,7 +15,6 @@ public class ScreenManager {
   }
 
   public static void run() {
-    p.background(0);
     ScreenManager.currentScreen.update();
     ScreenManager.currentScreen.render();
   }
