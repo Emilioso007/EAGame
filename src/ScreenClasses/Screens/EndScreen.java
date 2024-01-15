@@ -13,7 +13,7 @@ public class EndScreen extends Screen{
     public EndScreen() {
         super();
         p = ScreenManager.p;
-        background = p.loadImage("\\Images\\Backgrounds\\EndScreen.png");
+        background = p.loadImage("Images/Backgrounds/EndScreen.png");
     }
 
     public void update() {

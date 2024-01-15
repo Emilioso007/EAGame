@@ -45,10 +45,10 @@ public class Game extends Screen {
                     break;
             }
 
-            textures[0 + i * 4] = p.loadImage("\\Images\\Textures\\" + worldType + "\\sky.png");
-            textures[1 + i * 4] = p.loadImage("\\Images\\Textures\\" + worldType + "\\grass.png");
-            textures[2 + i * 4] = p.loadImage("\\Images\\Textures\\" + worldType + "\\hole.png");
-            textures[3 + i * 4] = p.loadImage("\\Images\\Textures\\" + worldType + "\\dirt.png");
+            textures[0 + i * 4] = p.loadImage("Images/Textures/" + worldType + "/sky.png");
+            textures[1 + i * 4] = p.loadImage("Images/Textures/" + worldType + "/grass.png");
+            textures[2 + i * 4] = p.loadImage("Images/Textures/" + worldType + "/hole.png");
+            textures[3 + i * 4] = p.loadImage("Images/Textures/" + worldType + "/dirt.png");
 
         }
 
