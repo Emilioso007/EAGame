@@ -109,12 +109,12 @@ public class Game extends Screen {
                 gameManager.getBall().getRadius() * 40,
                 gameManager.getBall().getRadius() * 40);
 
-        p.fill(0);
-        p.textSize(20);
-        p.textAlign(PApplet.CENTER, PApplet.CENTER);
-        p.text("x: " + gameManager.getBall().getX() + " y: " + gameManager.getBall().getY() + "\nxSpeed: "
-                + gameManager.getBall().getXSpeed() + " ySpeed: " + gameManager.getBall().getYSpeed() + "\nSwings: "
-                + gameManager.getGolfClub().getSwings(), 16 * 40, 9 * 40);
+        // p.fill(0);
+        // p.textSize(20);
+        // p.textAlign(PApplet.CENTER, PApplet.CENTER);
+        // p.text("x: " + gameManager.getBall().getX() + " y: " + gameManager.getBall().getY() + "\nxSpeed: "
+        //         + gameManager.getBall().getXSpeed() + " ySpeed: " + gameManager.getBall().getYSpeed() + "\nSwings: "
+        //         + gameManager.getGolfClub().getSwings(), 16 * 40, 9 * 40);
 
     }
 
